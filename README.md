@@ -1,8 +1,8 @@
 ABOUT
 =====
 
-+ This repository provides a dockerised bundle of nginx and php5-fpm.
-+ The container is running nginx-1.4.6 and php5-fpm-5.5.9 on Ubuntu 14.04 LTS.
++ This repository provides a dockerised bundle of nginx and php7.0-fpm.
++ The container is running nginx-1.11.7 and php7.0-fpm-5.5.9 on Ubuntu 16.04 LTS.
 
 CONFIG
 ======
@@ -20,7 +20,7 @@ BUILD
 =====
 
 1. Clone the repo and cd into it
-2. Build the image with `docker build -t bulgroz/nginxphp .`
+2. Build the image with `docker build -t {your_tag} .`
 
 USAGE
 =====
@@ -28,7 +28,7 @@ USAGE
 This image exposes 3 volumes `/etc/nginx/sites-enabled`, `/etc/nginx/sites-available` and `/home/www`.
 Run it with
 
-`docker run -d -p 127.0.0.1:80:80 -v /<path_to_the_repo>/sites-enabled:/etc/nginx/sites-enabled bulgroz/nginxphp`
+`docker run -d -p 127.0.0.1:80:80 -v /<path_to_the_repo>/sites-enabled:/etc/nginx/sites-enabled {your_tag}`
 
 * You probably want to run this image on a public interface (and not localhost),
 change the ip adress accordingly.
