@@ -1,8 +1,8 @@
 # nginx/php
 # VERSION 0.1
 
-FROM ubuntu:14.04
-MAINTAINER Paul Sore <paul.sore@gmail.com>
+FROM ubuntu:16.04
+MAINTAINER Floris Hoogenboom <floris@digitaldreamworks.nl>
 
 # Get some security updates
 RUN apt-get update
@@ -10,19 +10,20 @@ RUN apt-get -y upgrade
 
 # install nginx, php5, mysql driver and supervisor
 RUN apt-get -y install nginx
-RUN apt-get -y install php5-fpm
-RUN apt-get -y install php5-mysql
+RUN apt-get -y install php7.0-fpm
+RUN apt-get -y install php7.0-mysql
 RUN apt-get -y install supervisor
+RUN mkdir /run/php
 
 # Add our config files
 ADD conf/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 ADD conf/nginx.conf /etc/nginx/nginx.conf
-ADD conf/php-fpm.conf /etc/php5/fpm/php-fpm.conf
-ADD conf/php.ini /etc/php5/fpm/php.ini
+ADD conf/php-fpm.conf /etc/php/7.0/fpm/php-fpm.conf
+ADD conf/php.ini /etc/php/7.0/fpm/php.ini
 
 # disable the daemons for nginx & php
 # RUN echo "daemon off;" >> /etc/nginx/nginx.conf
-# RUN sed -i "s/;daemonize = yes/daemonize = no/g" /etc/php5/fpm/php-fpm.conf
+# RUN sed -i "s/;daemonize = yes/daemonize = no/g" /etc/php/7.0/fpm/php-fpm.conf
 
 # sites volume
 RUN mkdir /home/www
