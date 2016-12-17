@@ -13,13 +13,16 @@ RUN apt-get -y install nginx
 RUN apt-get -y install php7.0-fpm
 RUN apt-get -y install php7.0-mysql
 RUN apt-get -y install supervisor
-RUN mkdir /run/php
 
 # Add our config files
 ADD conf/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 ADD conf/nginx.conf /etc/nginx/nginx.conf
 ADD conf/php-fpm.conf /etc/php/7.0/fpm/php-fpm.conf
 ADD conf/php.ini /etc/php/7.0/fpm/php.ini
+
+# Start the php7.0-fpm service once on build to make sure all
+# needed files a present in the container
+RUN service php7.0-fpm start
 
 # disable the daemons for nginx & php
 # RUN echo "daemon off;" >> /etc/nginx/nginx.conf
